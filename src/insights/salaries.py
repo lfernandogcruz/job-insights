@@ -46,7 +46,7 @@ def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
         return True
     return False
     raise NotImplementedError
-    # to test it
+    # to test it run:
     # python3 -m pytest -k test_matches_salary_range
 
 
