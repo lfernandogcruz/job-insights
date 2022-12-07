@@ -20,30 +20,34 @@ def get_min_salary(path: str) -> int:
 # mentorship with the pokemon's get_min_attack example
 
 
+def job_salaries_validation(job: Dict) -> bool:
+    if "min_salary" not in job or "max_salary" not in job:
+        return False
+    if not int(job["min_salary"]):
+        return False
+    if not int(job["max_salary"]):
+        return False
+    if int(job["min_salary"]) > int(job["max_salary"]):
+        return False
+    return True
+
+
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
-    """Checks if a given salary is in the salary range of a given job
-
-    Parameters
-    ----------
-    job : dict
-        The job with `min_salary` and `max_salary` keys
-    salary : int
-        The salary to check if matches with salary range of the job
-
-    Returns
-    -------
-    bool
-        True if the salary is in the salary range of the job, False otherwise
-
-    Raises
-    ------
-    ValueError
-        If `job["min_salary"]` or `job["max_salary"]` doesn't exists
-        If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greather than `job["max_salary"]`
-        If `salary` isn't a valid integer
-    """
+    if not job_salaries_validation(job):
+        raise ValueError
+    if not int(salary):
+        raise ValueError
+    if int(salary) <= 0:
+        raise ValueError
+    if (
+        int(job["min_salary"]) <= int(salary)
+        and int(salary) <= int(job["max_salary"])
+    ):
+        return True
+    return False
     raise NotImplementedError
+    # to test it
+    # python3 -m pytest -k test_matches_salary_range
 
 
 def filter_by_salary_range(
@@ -64,4 +68,9 @@ def filter_by_salary_range(
     list
         Jobs whose salary range contains `salary`
     """
+    filtered_jobs = []
+    for job in jobs:
+        if matches_salary_range(job, salary):
+            filtered_jobs.append(job)
+    return filtered_jobs
     raise NotImplementedError
