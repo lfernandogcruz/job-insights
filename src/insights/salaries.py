@@ -22,27 +22,40 @@ def get_min_salary(path: str) -> int:
 
 def job_salaries_validation(job: Dict) -> bool:
     if "min_salary" not in job or "max_salary" not in job:
+        print("Missing salary range", job)
         return False
-    if not int(job["min_salary"]):
+    if not int(job["min_salary"]) or int(job["min_salary"]) < 0:
+        print("Invalid min salary", job)
         return False
-    if not int(job["max_salary"]):
+    if not int(job["max_salary"]) or int(job["max_salary"]) < 0:
+        print("Invalid max salary", job)
         return False
     if int(job["min_salary"]) > int(job["max_salary"]):
+        print("Invalid salary range", job)
+        return False
+    return True
+
+
+def salary_check(salary: Union[int, str]) -> bool:
+    if not int(salary) or int(salary) <= 0:
+        print("Invalid salary", salary)
         return False
     return True
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
-    if not job_salaries_validation(job):
-        raise ValueError
-    if not int(salary):
-        raise ValueError
-    if int(salary) <= 0:
+    is_range_valid = job_salaries_validation(job)
+    is_salary_valid = salary_check(salary)
+    print("is_range_valid", is_range_valid)
+    print("is_salary_valid", is_salary_valid)
+    if not is_range_valid or not is_salary_valid:
         raise ValueError
     if (
         int(job["min_salary"]) <= int(salary)
         and int(salary) <= int(job["max_salary"])
     ):
+        print("Salary range matches", job)
+        print("Salary", salary)
         return True
     return False
     raise NotImplementedError
