@@ -5,21 +5,21 @@ import pytest
 VALID_PATH = "data/jobs.csv"
 INVALID_PATH = "data/steve.csv"
 
-FIRST_WORD_LOWERCASE = "python"
-FIRST_WORD_MIGUXOCASE = "PyTHoN"
+FIRST_WORD_LOWERCASE = "techno"
+FIRST_WORD_MIGUXOCASE = "tEcHnO"
 
-SECOND_WORD_LOWERCASE = "javascript"
-SECOND_WORD_MIGUXOCASE = "JaVaScrIPt"
+SECOND_WORD_LOWERCASE = "company"
+SECOND_WORD_MIGUXOCASE = "CoMpAnY"
 
 NONEXISTENT_WORD = "xinforimpola"
 
 
 def test_counter():
-    assert count_ocurrences(VALID_PATH, FIRST_WORD_LOWERCASE) == 1639
-    assert count_ocurrences(VALID_PATH, FIRST_WORD_MIGUXOCASE) == 1639
+    assert count_ocurrences(VALID_PATH, FIRST_WORD_LOWERCASE) == 4863
+    assert count_ocurrences(VALID_PATH, FIRST_WORD_MIGUXOCASE) == 4863
 
-    assert count_ocurrences(VALID_PATH, SECOND_WORD_LOWERCASE) == 122
-    assert count_ocurrences(VALID_PATH, SECOND_WORD_MIGUXOCASE) == 122
+    assert count_ocurrences(VALID_PATH, SECOND_WORD_LOWERCASE) == 3130
+    assert count_ocurrences(VALID_PATH, SECOND_WORD_MIGUXOCASE) == 3130
 
     assert count_ocurrences(VALID_PATH, NONEXISTENT_WORD) == 0
 
